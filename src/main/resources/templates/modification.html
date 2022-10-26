@@ -1,0 +1,58 @@
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Layout">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+</head>
+<body>
+<div layout:fragment="cardBody">
+    <div style="padding: 1em">
+        <form method="post" th:action="@{/admin/updateEtudiant}">
+            <input type="hidden" name="id" th:value="${etudiant.id}">
+            <div class="field">
+                <label for="nom" class="label">Nom</label>
+                <div class="control">
+                <input class="input" type="text" placeholder="Text input" id="nom" name="nom" th:value="${etudiant.nom}" required>
+                </div>
+                    <span class="help is-danger" th:errors="${etudiant.nom}"></span>
+            </div>
+            <div class="field">
+                <label for="nom" class="label">Prenom</label>
+                <div class="control">
+                <input class="input" type="text" placeholder="Text input" id="prenom" name="prenom" th:value="${etudiant.prenom}" required>
+                </div>
+                    <span class="help is-danger" th:errors="${etudiant.prenom}"></span>
+            </div>
+            <div class="field">
+                <label for="nom" class="label">Email</label>
+                <div class="control">
+                <input class="input" type="text" placeholder="Text input" id="email" name="email" th:value="${etudiant.email}" required>
+                </div>
+                    <span class="help is-danger" th:errors="${etudiant.email}"></span>
+            </div>
+            <div class="field">
+                <label for="ddn" class="label">Date de naissance</label>
+                <div class="control">
+                <input class="input" type="date" placeholder="Text input" name="dateNaissance" id="ddn" th:value="${etudiant.dateNaissance}" required>
+                </div>
+                    <span class="help is-danger" th:errors="${etudiant.dateNaissance}"></span>
+            </div>
+            <div class="field">
+                <select name="genre">
+                    <option th:each="genreOpt : ${T(ma.esi.etudiant.entites.Genre).values()}"
+                            th:value="${genreOpt}" th:text="${genreOpt}"></option>
+                </select>
+            </div>
+            <div class="field">
+                <div>
+                    <input type="checkbox" id="enRegle" name="enRegle" th:checked="${etudiant.blame}" >
+                    <label for="enRegle">Est-ce-que l'étudiant en régle ?</label>
+                    <span class="help is-danger" th:errors="${etudiant.blame}"></span>
+                </div>
+            </div>
+            <button type="submit" class="button is-link">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

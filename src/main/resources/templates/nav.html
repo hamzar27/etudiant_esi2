@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+</head>
+<body>
+<nav th:fragment="navbar" class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu" style="padding: 2em">
+        <div class="navbar-start">
+            <a class="navbar-item" href="/">Etudiants</a>
+            <a class="navbar-item" th:href="@{/admin/add}">Ajouter Etudiant</a>
+        </div>
+        <form class="field has-addons" method="get" th:action="@{index}" style="margin-top: 1em">
+            <div class="control" >
+                <input class="input"  type="search"  name="keyword" th:value="${keyword}">
+            </div>
+            <div class="control">
+                <button class="button is-info" type="submit">Search</button>
+            </div>
+        </form>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-light" th:href="@{/logout}">
+                        Log out
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

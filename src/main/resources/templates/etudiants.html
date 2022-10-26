@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="Layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+
+</head>
+<body>
+<div layout:fragment="cardBody" style="padding: 1em" >
+    <table class="table" style="margin-left: auto; margin-right: auto">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOM</th>
+            <th>PRENOM</th>
+            <th>EMAIL</th>
+            <th>DATE NAISSANCE</th>
+            <th>GENRE</th>
+            <th>BLAME</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="e:${etudiants}">
+            <td th:text="${e.id}"></td>
+            <td th:text="${e.nom}"></td>
+            <td th:text="${e.prenom}"></td>
+            <td th:text="${e.email}"></td>
+            <td th:text="${e.dateNaissance}"></td>
+            <td th:text="${e.genre}"></td>
+            <td th:text="${e.blame}"></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><a class="button is-warning is-light"
+                                                    th:href="@{/admin/update(id=${e.id})}">Edit
+            </a>
+                <a class="button is-danger is-light" onclick="return confirm('Etes-vous sure ?')"
+                   th:href="@{/admin/delete(id=${e.id})}">Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+        <div class="tabs is-centered ">
+            <ul>
+                <li th:each="page,status:${Pages}">
+                    <a th:class="${status.index == pageCourant ? 'button is-link is-outlined' : 'button is-link is-outlined'}"
+                       th:href="@{index(page=${status.index},keyword=${keyword})}"
+                       th:text="${status.index}"
+                    ></a>
+                </li>
+            </ul>
+        </div>
+</div>
+</body>
+</html>
